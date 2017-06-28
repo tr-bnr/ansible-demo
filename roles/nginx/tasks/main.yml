@@ -1,0 +1,26 @@
+- name: "Install nginx"
+  apt: 
+    name: "nginx"
+    update_cache: yes
+- name: "Adds default config"
+  template: 
+    src: default
+    dest: /etc/nginx/sites-available/default
+    owner: root
+    group: root
+  notify: "restart nginx"
+- name: "Creates root directory"
+  file:
+   path: "{{nginx_root_dir}}"
+   state: directory
+- name: "Adds default index.html"
+  template: 
+    src: index.html
+    dest: "{{nginx_root_dir}}/index.html"
+    owner: root
+  notify: "restart nginx"
+- name: "Adds default 404 image"
+  copy: 
+    src: 404.jpg
+    dest: "{{nginx_root_dir}}/404.jpg"
+  notify: "restart nginx"

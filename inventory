@@ -1,0 +1,6 @@
+[nginx]
+ansible-dev.pgh.com
+
+[all:vars]
+ansible_user=vagrant
+ansible_ssh_private_key_file=".vagrant/machines/dev-db/virtualbox/private_key"
